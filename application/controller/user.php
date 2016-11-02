@@ -30,10 +30,13 @@ class user extends Controller {
     
     public function addNewUser()
     {
-        if (isset($_POST['submit_add_user'])){
+        if (isset($_POST['submit_add_user'])){ //form button is pressed
             
+            
+            //checks to see if username is taken, userExists function in model.php
+            //message.php is blank generic page that echos $message variable
             if ($this->model->userExists($_POST['username']) == true) {
-                $message = "Username taken!";
+                $message = "Username taken!"; 
                 require APP . 'view/_templates/header.php';
                 require APP . 'view/users/message.php';
                 require APP . 'view/users/signup.php';
@@ -41,14 +44,17 @@ class user extends Controller {
                 return;
             }
             
+            //php library hash function
             $pass_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
             
+            
+            //sends to addUser function in model.php
             $this->model->addUser($_POST["username"],
                         $_POST["email"], $pass_hash);
             
             
             
-            
+            //after signup complete, redirects to sign in page
             header('location: '. URL . 'user/signin');
         }
         
@@ -63,6 +69,7 @@ class user extends Controller {
             $username = $_POST['username'];
             $password = $_POST['password'];
             
+            //verifyCredentials function in model.php checks hashed pass against user pass
             $verifyCredentials = $this->model->verifyCredentials($username, $password);
             
             if($verifyCredentials == false) {
@@ -72,6 +79,8 @@ class user extends Controller {
                 require APP . 'view/users/signin.php';
                 require APP . 'view/_templates/footer.php';
             } else {
+                //set session variables to user info from database
+                //this is where we will set the session variable isStudent on our project
                 $user = $this->model->getUserFromUsername($username);
                 $_SESSION['user_id'] = $user->id;
                 $_SESSION['username'] = $user->username;

@@ -26,6 +26,8 @@ class Model
     
     /**
      * Get all songs from database
+     * 
+     * 
      */
     
     public function getAllSongs()
@@ -41,6 +43,8 @@ class Model
         return $query->fetchAll();
     }
     
+    
+    //Once image is prepped in the picture.php controller, inserting in DB is easy
     public function addImage($image){
         $sql = "INSERT INTO student_bnitschk.images (image) "
                 . "VALUES (:image)";
@@ -102,6 +106,16 @@ class Model
         return $query->fetch();
     }
     
+    /*
+     * 
+     * 
+     * Nothing below this point is relevant for our project
+     * 
+     * 
+     * 
+     * 
+     * 
+     */
     
     public function addSong($artist, $track, $link)
     {

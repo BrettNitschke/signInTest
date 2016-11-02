@@ -49,10 +49,12 @@ class picture extends Controller
             $image = null; //image null by default
             
             if ($file != null && getimagesize($file)){
+                // resizeImage function located in core/controller.php file
                 parent::resizeImage($file);
                 $image = file_get_contents($file);
             }
             
+            //sends to addImage function in model.php
             $this->model->addImage($image);
             
             header('location: '. URL . 'picture/pic');

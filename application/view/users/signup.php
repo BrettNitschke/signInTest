@@ -1,7 +1,7 @@
 <div class="container">
     <h2>Sign Up Test</h2>
     <div class="box">
-        <h3>Sign Up</h3>
+        <h3>Sign Up</h3> <!-- This takes you to the addNewUser function in the user.php controller file -->
         <form action="<?php echo URL; ?>user/addNewUser" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="username" class="control-label">Username</label>
